@@ -8,6 +8,8 @@ import ToneSelector from "@/components/ToneSelector";
 import PostTextInput from "@/components/PostTextInput";
 import GenerateButton from "@/components/GenerateButton";
 import PostPreview from "@/components/PostPreview";
+import Loading from "@/components/Loading";
+import axios from "axios";
 
 export default function Home() {
   const [image, setImage] = useState<string | null>(null);
@@ -16,14 +18,31 @@ export default function Home() {
   const [tone, setTone] = useState("Friendly");
   const [text, setText] = useState("");
   const [generated, setGenerated] = useState(false);
+  const [isLoading, setLoader] = useState(false);
+  const [GeneratedText, setGeneratedText] = useState("");
+  
 
 useEffect(()=>{
   console.log(tone,text, brandColor)
 
 },[image,logo,tone,text, brandColor])
-  const handleGenerate = () => {
+  const handleGenerate = async () => {
     // TODO: Integrate Gemini API
-    setGenerated(true);
+    //setGenerated(true);
+    setLoader(true)
+    setGenerated(false)
+    const body = {
+      text : text
+    }
+    const res = await axios.post('/api/gemini', body)
+    if (res.status== 200) {
+      setGeneratedText(res.data.candidates?.[0]?.content?.parts?.[0]?.text || "No content");
+      setLoader(false)
+      setGenerated(true)
+      
+       
+      
+    }
   };
 
   return (
@@ -40,7 +59,10 @@ useEffect(()=>{
       </div>
 
       {generated && (
-        <PostPreview image={image} logo={logo} text={text} brandColor={brandColor} />
+        <PostPreview image={image} logo={logo} text={GeneratedText} brandColor={brandColor} />
+      )}
+      {isLoading && (
+        <Loading/>
       )}
     </div>
   );

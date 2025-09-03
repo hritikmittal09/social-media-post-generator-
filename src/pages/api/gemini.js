@@ -1,11 +1,28 @@
 export default async function handler(req, res) {
-  if (req.method !== "GET") {
+  if (req.method !== "POST") {
     return res.status(405).json({ error: "Method not allowed" });
   }
+  //console.log(req.body);
+  const prompt = `
+You are a professional social media copywriter. 
+Write a **single best detailed social media post** about the following company.
+Do not provide multiple options, variations, or headings. 
+Just return one polished post that:
+- Starts with a strong hook
+- Uses simple and engaging language
+- Highlights the company’s unique value
+- Ends with a clear call-to-action
+- No labels like "Option 1" or "Option 2" — just the final post text.
+
+Company details:
+${req.body.text}
+`;
+  
+  
 
   try {
     const response = await fetch(
-      "https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent",
+      
       {
         method: "POST",
         headers: {
@@ -15,7 +32,7 @@ export default async function handler(req, res) {
         body: JSON.stringify({
           contents: [
             {
-              parts: [{ text : "Explain how AI works in a paragraph and write short post on it " }],
+              parts: [{ text : prompt }],
             },
           ],
         }),
