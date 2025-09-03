@@ -7,7 +7,7 @@ export default function GenerateButton({ brandColor, onClick }: GenerateButtonPr
   return (
     <button
       onClick={onClick}
-      className="w-full py-2 rounded-xl font-bold"
+      className="w-full py-2 rounded-xl font-bold  cursor-pointer"
       style={{ backgroundColor: brandColor }}
     >
       Generate Post

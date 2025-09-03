@@ -1,4 +1,6 @@
-import { useState } from "react";
+
+"use client"
+import { useEffect, useState } from "react";
 import Header from "@/components/Header";
 import UploadImage from "@/components/UploadImage";
 import BrandColorPicker from "@/components/BrandColorPicker";
@@ -15,6 +17,10 @@ export default function Home() {
   const [text, setText] = useState("");
   const [generated, setGenerated] = useState(false);
 
+useEffect(()=>{
+  console.log(tone,text, brandColor)
+
+},[image,logo,tone,text, brandColor])
   const handleGenerate = () => {
     // TODO: Integrate Gemini API
     setGenerated(true);

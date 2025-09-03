@@ -10,7 +10,7 @@ export default function ToneSelector({ tone, setTone }: ToneSelectorProps) {
       <select
         value={tone}
         onChange={(e) => setTone(e.target.value)}
-        className="text-black p-2 rounded ml-2"
+        className="text-white p-2 rounded ml-2"
       >
         <option>Friendly</option>
         <option>Professional</option>

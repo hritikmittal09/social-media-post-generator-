@@ -10,7 +10,7 @@ export default function PostTextInput({ text, setText }: PostTextInputProps) {
       <textarea
         value={text}
         onChange={(e) => setText(e.target.value)}
-        className="w-full p-2 rounded text-black mt-2"
+        className="w-full p-2 rounded text-white mt-2"
       />
     </div>
   );
