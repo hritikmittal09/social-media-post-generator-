@@ -24,10 +24,11 @@ export default function UploadImage({ label, onUpload }: UploadImageProps) {
   return (
     <div className="mb-4">
       <label className="block mb-2">{label}</label>
-      <input
+      <input 
+
         type="file"
         accept="image/*"
-        className="mt-2 block w-full"
+        className="mt-2 block w-full border-white"
         onChange={handleUpload}
       />
       {preview && <img src={preview} alt="Preview" className="w-full mt-2 rounded-lg" />}

@@ -8,6 +8,7 @@ export default function PostTextInput({ text, setText }: PostTextInputProps) {
     <div className="mb-4">
       <label>Desired Post Text:</label>
       <textarea
+      placeholder="Type Your psst content here ..."
         value={text}
         onChange={(e) => setText(e.target.value)}
         className="w-full p-2 rounded text-white mt-2"
