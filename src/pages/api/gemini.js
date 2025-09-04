@@ -8,6 +8,7 @@ You are a professional social media copywriter.
 Write a **single best detailed social media post** about the following company.
 Do not provide multiple options, variations, or headings. 
 Just return one polished post that:
+- post tone should be ${req.body.tone}
 - Starts with a strong hook
 - Uses simple and engaging language
 - Highlights the company’s unique value
@@ -22,6 +23,8 @@ ${req.body.text}
 
   try {
     const response = await fetch(
+      "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent", // ✅ Gemini endpoint
+      
       
       {
         method: "POST",

@@ -10,6 +10,7 @@ import GenerateButton from "@/components/GenerateButton";
 import PostPreview from "@/components/PostPreview";
 import Loading from "@/components/Loading";
 import axios from "axios";
+import Error from "@/components/Error";
 
 export default function Home() {
   const [image, setImage] = useState<string | null>(null);
@@ -20,6 +21,8 @@ export default function Home() {
   const [generated, setGenerated] = useState(false);
   const [isLoading, setLoader] = useState(false);
   const [GeneratedText, setGeneratedText] = useState("");
+  const [isError, setErrorMessage] = useState<any | undefined>(undefined);
+
   
 
 useEffect(()=>{
@@ -31,18 +34,31 @@ useEffect(()=>{
     //setGenerated(true);
     setLoader(true)
     setGenerated(false)
-    const body = {
-      text : text
-    }
-    const res = await axios.post('/api/gemini', body)
-    if (res.status== 200) {
-      setGeneratedText(res.data.candidates?.[0]?.content?.parts?.[0]?.text || "No content");
-      setLoader(false)
-      setGenerated(true)
-      
-       
-      
-    }
+    setErrorMessage(undefined)
+
+  try {
+      const body = {
+        text : text,
+        tone : tone, 
+        image : image,
+        brandColor  : brandColor
+      }
+      const res = await axios.post('/api/gemini', body)
+      if (res.status== 200) {
+        setGeneratedText(res.data.candidates?.[0]?.content?.parts?.[0]?.text || "No content");
+        setLoader(false)
+        setErrorMessage(undefined)
+        setGenerated(true)
+        
+         
+        
+      }
+  } catch (error :any) {
+    setErrorMessage(error.message )
+    setLoader(false)
+    setGenerated(false)
+    
+  }
   };
 
   return (
@@ -64,6 +80,9 @@ useEffect(()=>{
       {isLoading && (
         <Loading/>
       )}
+      {(isError != undefined )&& (
+        <Error message={isError} />
+        )}
     </div>
   );
 }
