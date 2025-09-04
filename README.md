@@ -1,5 +1,5 @@
 # 📱 Social Media Post Generator  
-
+![alt text](<Screenshot 2025-09-04 192413.png>) ![alt text](<Screenshot 2025-09-04 193517.png>) ![alt text](<Screenshot 2025-09-04 193612.png>)
 A web application that generates **AI-powered social media posts** based on vendor details, images, logos, and tone of voice.  
 Built with **Next.js, TypeScript, TailwindCSS, and Google Gemini API**.  
 
