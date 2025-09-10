@@ -4,19 +4,15 @@ export default async function handler(req, res) {
   }
   //console.log(req.body);
   const prompt = `
-You are a professional social media copywriter. 
-Write a **single best detailed social media post** about the following company.
-Do not provide multiple options, variations, or headings. 
-Just return one polished post that:
-- post tone should be ${req.body.tone}
-- Starts with a strong hook
-- Uses simple and engaging language
-- Highlights the company’s unique value
-- Ends with a clear call-to-action
-- No labels like "Option 1" or "Option 2" — just the final post text.
-
-Company details:
-${req.body.text}
+You are a professional social media copywriter.  
+Write a single best detailed social media post about the topic: ${req.body.text}.  
+- The post tone should be ${req.body.tone}.  
+- Start with a strong hook.  
+- Use simple, engaging, and conversational language.  
+- Highlight the unique value or importance of the topic.  
+- End with a clear and compelling call-to-action.  
+- Do not provide multiple options, variations, or headings.  
+- Just return one final post text without labels.  
 `;
   
   
